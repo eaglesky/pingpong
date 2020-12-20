@@ -62,6 +62,14 @@ $(function() {
         $("#paddleA").css("top", pingpong.paddleA.y);
     }
 
+    function renderBall() {
+        var ball = pingpong.ball;
+        $("#ball").css({
+            "left" : ball.x + ball.speed * ball.directionX,
+            "top" : ball.y + ball.speed * ball.directionY,
+        });
+    }
+
     function render() {
         renderBall();
         renderPaddles();
@@ -87,6 +95,7 @@ $(function() {
 
     function gameloop() {
         moveBall();
+        autoMovePaddleA();
     }
 
     function init() {
@@ -171,17 +180,19 @@ $(function() {
             }
         }
 
-
         // update the ball position data
         ball.x += ball.speed * ball.directionX;
         ball.y += ball.speed * ball.directionY;
     }
 
-    function renderBall() {
-        var ball = pingpong.ball;
-        $("#ball").css({
-            "left" : ball.x + ball.speed * ball.directionX,
-            "top" : ball.y + ball.speed * ball.directionY,
-        });
+    function autoMovePaddleA() {
+        var speed = 4;
+        var direction = 1;
+        var paddleY = pingpong.paddleA.y + pingpong.paddleA.height/2;
+        if (paddleY > pingpong.ball.y) {
+        direction = -1;
+        }
+        pingpong.paddleA.y += speed * direction;
     }
+
 });
