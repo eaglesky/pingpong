@@ -23,6 +23,8 @@
     renderPaddles();
 })(jQuery);*/
 
+
+
 $(function() {
     // data definition
     var pingpong = {
@@ -39,9 +41,47 @@ $(function() {
             width: 20,
             height: 70,
         },
+        playground: {
+            offsetTop: $("#playground").offset().top,
+        }
     };
 
-    $("#paddleA").css("top", pingpong.paddleA.y);
-    $("#paddleB").css("top", pingpong.paddleB.y);
+    // view rendering
+    function renderPaddles() {
+        $("#paddleB").css("top", pingpong.paddleB.y);
+        $("#paddleA").css("top", pingpong.paddleA.y);
+    }
+
+    function render() {
+        renderPaddles();
+        window.requestAnimationFrame(render);
+    }
+
+    function handleMouseInputs() {
+        // run the game when mouse moves in the playground.
+        $('#playground').mouseenter(function(){
+            pingpong.isPaused = false;
+        });
+    
+        // pause the game when mouse moves out the playground.
+        $('#playground').mouseleave(function(){
+            pingpong.isPaused = true;
+        });
+    
+        // calculate the paddle position by using the mouse position.
+        $('#playground').mousemove(function(e){
+            pingpong.paddleB.y = e.pageY - pingpong.playground.offsetTop;
+        });
+    }
+
+    function init() {
+        // view rendering
+        window.requestAnimationFrame(render);
+        // inputs
+        handleMouseInputs();
+    }
+
+    // Execute the starting point
+    init();
 
 });
