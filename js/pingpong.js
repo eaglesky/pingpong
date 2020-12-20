@@ -43,7 +43,16 @@ $(function() {
         },
         playground: {
             offsetTop: $("#playground").offset().top,
-        }
+            height: parseInt($("#playground").height()),
+            width: parseInt($("#playground").width()),
+        },
+        ball: {
+            speed: 5,
+            x: 150,
+            y: 100,
+            directionX: 1,
+            directionY: 1,
+        },
     };
 
     // view rendering
