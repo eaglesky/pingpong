@@ -28,6 +28,9 @@
 $(function() {
     // data definition
     var pingpong = {
+        scoreA : 0, // score for player A
+        scoreB : 0, // score for player B
+
         paddleA: {
             x: 50,
             y: 100,
@@ -132,6 +135,10 @@ $(function() {
         pingpong.ball.y = 100;
         // update the ball location variables;
         pingpong.ball.directionX = -1;
+
+        // player B lost.
+        pingpong.scoreA += 1;
+        $("#score-a").text(pingpong.scoreA);
     }
 
     function playerBWin() {
@@ -139,6 +146,10 @@ $(function() {
         pingpong.ball.x = 150;
         pingpong.ball.y = 100;
         pingpong.ball.directionX = 1;
+
+        // player A lost.
+        pingpong.scoreB += 1;
+        $("#score-b").text(pingpong.scoreB);
     }
 
     function moveBall() {

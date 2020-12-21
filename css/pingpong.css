@@ -16,6 +16,17 @@
     overflow: hidden;
     cursor: pointer;
   }
+
+  /* Score board */
+  #scoreboard {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    color: lightgrey;
+  }
+
   #ball {
     background: #fbb;
     position: absolute;
